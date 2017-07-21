@@ -20,13 +20,9 @@ for line in f:
     missed.append(line[5])
 
 correct_percent = [float(x)/float(y) for x, y in zip(correct, total_pred)]
-for _ in range(3):
-    correct_percent = correct_percent + correct_percent
 #print correct_percent
 
 recall_percent = [(float(y)-float(x))/float(y) for x, y in zip(missed, total_truth)]
-for _ in range(3):
-    recall_percent = recall_percent + recall_percent
 #print missed_percent
 
 plt.hist(correct_percent, bins='auto')
