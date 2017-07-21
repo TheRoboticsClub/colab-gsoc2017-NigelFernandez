@@ -3,11 +3,13 @@ from operator import itemgetter
 from finding_iou import find_iou
     
 fr0 = open('file_name_list.txt', 'r')
+fw = open('accuracy_stats.txt', 'w')
 
+fw.write('file_name' + ' ' + 'total_pred' + ' ' + 'correct' + ' ' + 'incorrect' + ' ' + 'total_truth' + ' ' + 'missed' + '\n')
 for line in fr0:
     file_name = line.rstrip()
     fr1 = open('Labels/' + file_name + '.txt', 'r')
-    fr2 = open('out/' + file_name + '.json', 'r')
+    fr2 = open('Pictures/out/' + file_name + '.json', 'r')
     pred = json.load(fr2)
     pred_objs = []
     for el in pred:
@@ -50,7 +52,6 @@ for line in fr0:
             incorrect += 1
     missed += len(truth_objs)
 
-    print (total_pred, correct, incorrect)
-    print (total_truth, missed)
+    fw.write(file_name + ' ' + str(total_pred) + ' ' + str(correct) + ' ' + str(incorrect) + ' ' + str(total_truth) + ' ' + str(missed) + '\n')
     
 #sorted_obj = sorted(obj_pred.items(), key=operator.itemgetter(1))    
